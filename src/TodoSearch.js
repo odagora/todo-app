@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./TodoSearch.css";
 
-export const TodoSearch = () => {
-  const [search, setSearch] = useState("");
-
+export const TodoSearch = ({ searchValue, setSearchValue }) => {
   const handleInputChange = (event) => {
-    setSearch(event.target.value);
+    setSearchValue(event.target.value);
   };
 
   return (
@@ -13,10 +11,10 @@ export const TodoSearch = () => {
       <input
         className="todo-search"
         placeholder="Escribe tu tarea aquí"
-        value={search}
+        value={searchValue}
         onChange={handleInputChange}
       />
-      <p>{search}</p>
+      <p>{searchValue}</p>
     </>
   );
 };

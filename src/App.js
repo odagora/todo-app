@@ -3,20 +3,36 @@ import { TodoList } from "./TodoList";
 import { TodoSearch } from "./TodoSearch";
 import { TodoItem } from "./TodoItem";
 import { CreateTodoButton } from "./CreateTodoButton";
+import { useState } from "react";
 
-const todos = [
+const defaultTodos = [
   { id: 1, text: "Estudiar Reactjs", completed: false },
   { id: 2, text: "Planchar la ropa", completed: false },
   { id: 3, text: "Enviar información del proyecto", completed: false },
 ];
 
 export const App = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const [todos, setTodos] = useState(defaultTodos);
+
+  const searchedTodos = !searchValue
+    ? todos
+    : todos.filter((todo) => {
+        const todoText = todo.text.toLowerCase();
+        const searchText = searchValue.toLowerCase();
+
+        return todoText.includes(searchText);
+      });
+
+  const completedTodos = todos.filter((todo) => todo.completed).length;
+  const totalTodos = todos.length;
+
   return (
     <>
-      <TodoCounter />
-      <TodoSearch />
+      <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       <TodoList>
-        {todos.map((todo) => (
+        {searchedTodos.map((todo) => (
           <TodoItem key={todo.id} text={todo.text} />
         ))}
       </TodoList>
