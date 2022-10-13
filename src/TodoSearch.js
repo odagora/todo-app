@@ -1,5 +1,6 @@
 import React from "react";
+import "./TodoSearch.css";
 
 export const TodoSearch = () => {
-  return <input placeholder="Escribe tu tarea aquí" />;
+  return <input className="todo-search" placeholder="Escribe tu tarea aquí" />;
 };
