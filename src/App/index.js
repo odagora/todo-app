@@ -1,8 +1,8 @@
-import { TodoCounter } from "./TodoCounter";
-import { TodoList } from "./TodoList";
-import { TodoSearch } from "./TodoSearch";
-import { TodoItem } from "./TodoItem";
-import { CreateTodoButton } from "./CreateTodoButton";
+import { TodoCounter } from "../TodoCounter";
+import { TodoList } from "../TodoList";
+import { TodoSearch } from "../TodoSearch";
+import { TodoItem } from "../TodoItem";
+import { CreateTodoButton } from "../CreateTodoButton";
 import { useState } from "react";
 
 const defaultTodos = [

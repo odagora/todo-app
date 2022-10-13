@@ -19,7 +19,6 @@ export const TodoSearch = ({ searchValue, setSearchValue }) => {
         onChange={handleInputChange}
         onKeyDown={handleInputReset}
       />
-      <p>{searchValue}</p>
     </>
   );
 };
