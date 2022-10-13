@@ -27,13 +27,25 @@ export const App = () => {
   const completedTodos = todos.filter((todo) => todo.completed).length;
   const totalTodos = todos.length;
 
+  const completeTodo = (text) => {
+    const todoIndex = todos.findIndex((todo) => todo.text === text);
+    const newTodos = [...todos];
+    newTodos[todoIndex].completed = true;
+    setTodos(newTodos);
+  };
+
   return (
     <>
       <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       <TodoList>
         {searchedTodos.map((todo) => (
-          <TodoItem key={todo.id} text={todo.text} />
+          <TodoItem
+            key={todo.id}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
+          />
         ))}
       </TodoList>
       <CreateTodoButton />
