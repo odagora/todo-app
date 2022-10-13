@@ -3,7 +3,12 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { AppUI } from "./AppUI";
 
 export const App = () => {
-  const [todos, saveTodos] = useLocalStorage("TODO_V1", []);
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    dataStatus,
+  } = useLocalStorage("TODO_V1", []);
+
   const [searchValue, setSearchValue] = useState("");
 
   const completedTodos = todos.filter((todo) => todo.completed).length;
@@ -32,6 +37,7 @@ export const App = () => {
 
   return (
     <AppUI
+      dataStatus={dataStatus}
       completedTodos={completedTodos}
       totalTodos={totalTodos}
       searchValue={searchValue}
