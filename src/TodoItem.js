@@ -1,7 +1,7 @@
 import React from "react";
 import "./TodoItem.css";
 
-export const TodoItem = ({ text, completed, onComplete }) => {
+export const TodoItem = ({ text, completed, onComplete, onDelete }) => {
   return (
     <li className="todo-item">
       <span
@@ -13,7 +13,9 @@ export const TodoItem = ({ text, completed, onComplete }) => {
       <p className={`'todo-item-p' ${completed && "todo-item-p--completed"}`}>
         {text}
       </p>
-      <span className="icon icon-delete">X</span>
+      <span className="icon icon-delete" onClick={onDelete}>
+        X
+      </span>
     </li>
   );
 };

@@ -28,9 +28,14 @@ export const App = () => {
   const totalTodos = todos.length;
 
   const completeTodo = (text) => {
-    const todoIndex = todos.findIndex((todo) => todo.text === text);
-    const newTodos = [...todos];
-    newTodos[todoIndex].completed = true;
+    const newTodos = todos.map((todo) =>
+      todo.text === text ? { ...todo, completed: true } : todo
+    );
+    setTodos(newTodos);
+  };
+
+  const deleteTodo = (text) => {
+    const newTodos = todos.filter((todo) => todo.text !== text);
     setTodos(newTodos);
   };
 
@@ -45,6 +50,7 @@ export const App = () => {
             text={todo.text}
             completed={todo.completed}
             onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
