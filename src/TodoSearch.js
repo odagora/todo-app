@@ -6,6 +6,10 @@ export const TodoSearch = ({ searchValue, setSearchValue }) => {
     setSearchValue(event.target.value);
   };
 
+  const handleInputReset = (event) => {
+    event.keyCode === 27 && setSearchValue("");
+  };
+
   return (
     <>
       <input
@@ -13,6 +17,7 @@ export const TodoSearch = ({ searchValue, setSearchValue }) => {
         placeholder="Escribe tu tarea aquí"
         value={searchValue}
         onChange={handleInputChange}
+        onKeyDown={handleInputReset}
       />
       <p>{searchValue}</p>
     </>
