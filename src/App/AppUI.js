@@ -10,6 +10,7 @@ import { TodoForm } from "../TodoForm";
 import { TodosError } from "../TodosError";
 import { TodosLoading } from "../TodosLoading";
 import { EmptyTodos } from "../EmptyTodos";
+import { TodoHeader } from "../TodoHeader";
 
 export const AppUI = () => {
   const {
@@ -19,11 +20,17 @@ export const AppUI = () => {
     deleteTodo,
     openModal,
     setOpenModal,
+    completedTodos,
+    totalTodos,
+    searchValue,
+    setSearchValue,
   } = useContext(TodoContext);
   return (
     <>
-      <TodoCounter />
-      <TodoSearch />
+      <TodoHeader>
+        <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
+        <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+      </TodoHeader>
       <TodoList>
         {dataStatus.error && <TodosError />}
         {dataStatus.loading &&
