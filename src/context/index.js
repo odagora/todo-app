@@ -25,23 +25,30 @@ function TodoProvider({ children }) {
         return todoText.includes(searchText);
       });
 
-  const completeTodo = (text) => {
+  const generateId = () => {
+    const id = Math.random().toString(36).slice(2);
+    return id;
+  };
+
+  const completeTodo = (id) => {
     const newTodos = todos.map((todo) =>
-      todo.text === text ? { ...todo, completed: true } : todo
+      todo.id === id ? { ...todo, completed: true } : todo
     );
     saveTodos(newTodos);
   };
 
-  const deleteTodo = (text) => {
-    const newTodos = todos.filter((todo) => todo.text !== text);
+  const deleteTodo = (id) => {
+    const newTodos = todos.filter((todo) => todo.id !== id);
     saveTodos(newTodos);
   };
 
   const addTodo = (text) => {
+    const id = generateId();
     const newTodos = [...todos];
     newTodos.push({
       completed: false,
       text,
+      id,
     });
     saveTodos(newTodos);
   };
