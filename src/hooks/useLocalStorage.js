@@ -22,7 +22,7 @@ export function useLocalStorage(itemName, initialValue) {
       } finally {
         setDataStatus({ ...dataStatus, loading: false });
       }
-    }, 1000);
+    }, 5000);
   }, []);
 
   const saveItem = (newItem) => {
