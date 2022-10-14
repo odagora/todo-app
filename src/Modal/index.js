@@ -1,11 +1,7 @@
-import React, { useContext } from "react";
 import ReactDOM from "react-dom";
-import { TodoContext } from "../context";
 import "./Modal.css";
 
-export const Modal = ({ children }) => {
-  const { setOpenModal } = useContext(TodoContext);
-
+export const Modal = ({ children, setOpenModal }) => {
   const handleClick = (event) => {
     event.target.className === "modal-background" && setOpenModal(false);
   };
