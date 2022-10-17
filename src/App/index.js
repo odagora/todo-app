@@ -32,14 +32,17 @@ export const App = () => {
         <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
         <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       </TodoHeader>
-      <TodoList>
-        {dataStatus.error && <TodosError />}
-        {dataStatus.loading &&
+      <TodoList
+        dataStatus={dataStatus}
+        searchedTodos={searchedTodos}
+        onError={(error) => <TodosError error={error} />}
+        onLoading={() =>
           Array(3)
             .fill(1)
-            .map((a, i) => <TodosLoading key={i} />)}
-        {!dataStatus.loading && !searchedTodos.length && <EmptyTodos />}
-        {searchedTodos.map((todo) => (
+            .map((_, i) => <TodosLoading key={i} />)
+        }
+        onEmptyTodos={() => <EmptyTodos />}
+        render={(todo) => (
           <TodoItem
             key={todo.text}
             text={todo.text}
@@ -47,8 +50,8 @@ export const App = () => {
             onComplete={() => completeTodo(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
           />
-        ))}
-      </TodoList>
+        )}
+      />
       {openModal && (
         <Modal setOpenModal={setOpenModal}>
           <TodoForm addTodo={addTodo} setOpenModal={setOpenModal} />
