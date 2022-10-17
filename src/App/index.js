@@ -10,6 +10,7 @@ import { TodosError } from "../TodosError";
 import { TodosLoading } from "../TodosLoading";
 import { EmptyTodos } from "../EmptyTodos";
 import { TodoHeader } from "../TodoHeader";
+import { EmptySearchResults } from "../EmptySearchResults";
 
 export const App = () => {
   const {
@@ -35,6 +36,8 @@ export const App = () => {
       <TodoList
         dataStatus={dataStatus}
         searchedTodos={searchedTodos}
+        totalTodos={totalTodos}
+        searchText={searchValue}
         onError={(error) => <TodosError error={error} />}
         onLoading={() =>
           Array(3)
@@ -42,6 +45,9 @@ export const App = () => {
             .map((_, i) => <TodosLoading key={i} />)
         }
         onEmptyTodos={() => <EmptyTodos />}
+        onEmptySearchResults={(searchText) => (
+          <EmptySearchResults searchText={searchText} />
+        )}
         render={(todo) => (
           <TodoItem
             key={todo.text}
@@ -51,7 +57,17 @@ export const App = () => {
             onDelete={() => deleteTodo(todo.id)}
           />
         )}
-      />
+      >
+        {(todo) => (
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => completeTodo(todo.id)}
+            onDelete={() => deleteTodo(todo.id)}
+          />
+        )}
+      </TodoList>
       {openModal && (
         <Modal setOpenModal={setOpenModal}>
           <TodoForm addTodo={addTodo} setOpenModal={setOpenModal} />
