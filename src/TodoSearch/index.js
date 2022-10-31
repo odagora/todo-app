@@ -1,6 +1,6 @@
 import "./TodoSearch.css";
 
-export const TodoSearch = ({ searchValue, setSearchValue }) => {
+export const TodoSearch = ({ searchValue, setSearchValue, loading }) => {
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -17,6 +17,7 @@ export const TodoSearch = ({ searchValue, setSearchValue }) => {
         value={searchValue}
         onChange={handleInputChange}
         onKeyDown={handleInputReset}
+        disabled={loading}
       />
     </>
   );

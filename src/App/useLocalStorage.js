@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export function useLocalStorage(itemName, initialValue) {
   const [dataStatus, setDataStatus] = useState({ loading: true, error: false });
   const [item, setItem] = useState(initialValue);
+  const [sincronizedItem, setSincronizedItem] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -21,9 +22,10 @@ export function useLocalStorage(itemName, initialValue) {
         setDataStatus({ ...dataStatus, error: true });
       } finally {
         setDataStatus({ ...dataStatus, loading: false });
+        setSincronizedItem(true);
       }
     }, 5000);
-  }, []);
+  }, [sincronizedItem]);
 
   const saveItem = (newItem) => {
     try {
@@ -35,5 +37,10 @@ export function useLocalStorage(itemName, initialValue) {
     }
   };
 
-  return { item, saveItem, dataStatus };
+  const sincronizeItem = () => {
+    setDataStatus({ ...dataStatus, loading: true });
+    setSincronizedItem(false);
+  };
+
+  return { item, saveItem, dataStatus, sincronizeItem };
 }

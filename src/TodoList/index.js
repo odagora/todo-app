@@ -21,7 +21,11 @@ export const TodoList = ({
       {!!totalTodos &&
         !searchedTodos.length &&
         onEmptySearchResults(searchText)}
-      <ul className="todo-list">{searchedTodos.map(render || children)}</ul>
+      <ul className="todo-list">
+        {!dataStatus.loading &&
+          !dataStatus.error &&
+          searchedTodos.map(render || children)}
+      </ul>
     </section>
   );
 };
