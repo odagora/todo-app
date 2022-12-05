@@ -14,20 +14,20 @@ import { EmptySearchResults } from "../EmptySearchResults";
 import { ChangeAlert } from "../ChangeAlert";
 
 export const App = () => {
+  const { state, stateUpdates } = useTodos();
+
   const {
     dataStatus,
     searchedTodos,
-    completeTodo,
-    deleteTodo,
-    openModal,
-    setOpenModal,
-    completedTodos,
     totalTodos,
+    completeTodo,
+    completedTodos,
+    openModal,
     searchValue,
-    setSearchValue,
-    addTodo,
-    sincronizeTodos,
-  } = useTodos();
+  } = state;
+
+  const { setSearchValue, deleteTodo, addTodo, setOpenModal, sincronizeTodos } =
+    stateUpdates;
 
   return (
     <>
